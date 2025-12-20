@@ -20,9 +20,10 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "kstate"
+// Preview feature - monitor Gradle releases for stability
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-include(
-    ":kstate-core",
-    ":kstate-compose",
-    ":sample-app"
-)
+include(":kstate-core")
+include(":kstate-compose")
+include(":sample-app")
+include(":kstate-viewmodel")
