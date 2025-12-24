@@ -22,7 +22,7 @@ publishing {
             from(components["java"])
             
             groupId = "com.github.farzadazimipour.kstate"
-            artifactId = "core"
+            artifactId = "kstate-core"
             version = "1.0.0"
             
             pom {
