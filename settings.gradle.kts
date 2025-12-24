@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -25,5 +26,5 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":kstate-core")
 include(":kstate-compose")
-include(":sample-app")
 include(":kstate-viewmodel")
+include(":sample-app")
