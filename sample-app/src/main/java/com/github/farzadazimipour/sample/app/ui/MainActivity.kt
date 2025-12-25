@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SecondaryTabRow
+import androidx.compose.material3.PrimaryScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,11 +25,14 @@ import com.github.farzadazimipour.sample.app.ui.counter.screens.CounterComposeSc
 import com.github.farzadazimipour.sample.app.ui.counter.screens.CounterViewModelScreen
 import com.github.farzadazimipour.sample.app.ui.login.mvi.LoginViewModel
 import com.github.farzadazimipour.sample.app.ui.login.screens.LoginScreen
+import com.github.farzadazimipour.sample.app.ui.cart.mvi.CartViewModel
+import com.github.farzadazimipour.sample.app.ui.cart.screens.CartScreen
 import com.github.farzadazimipour.sample.app.ui.theme.KstateTheme
 
 class MainActivity : ComponentActivity() {
     private val counterViewModel: CounterViewModel by viewModels()
     private val loginViewModel: LoginViewModel by viewModels()
+    private val cartViewModel: CartViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +43,7 @@ class MainActivity : ComponentActivity() {
                     AppTabs(
                         counterViewModel = counterViewModel,
                         loginViewModel = loginViewModel,
+                        cartViewModel = cartViewModel,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -52,13 +56,14 @@ class MainActivity : ComponentActivity() {
 fun AppTabs(
     counterViewModel: CounterViewModel,
     loginViewModel: LoginViewModel,
+    cartViewModel: CartViewModel,
     modifier: Modifier = Modifier,
 ) {
     var selectedTab by remember { mutableIntStateOf(0) }
-    val tabs = listOf("Counter VM", "Counter Compose", "Login")
+    val tabs = listOf("Counter ViewModel", "Counter Only Compose", "Login", "Cart")
 
     Column(modifier = modifier) {
-        SecondaryTabRow(
+        PrimaryScrollableTabRow(
             selectedTabIndex = selectedTab,
             modifier = Modifier.padding(bottom = 16.dp)
         ) {
@@ -69,7 +74,7 @@ fun AppTabs(
                     text = {
                         Text(
                             text = title,
-                            style = MaterialTheme.typography.titleMedium
+                            style = MaterialTheme.typography.titleSmall
                         )
                     }
                 )
@@ -80,6 +85,7 @@ fun AppTabs(
             0 -> CounterViewModelScreen(viewModel = counterViewModel)
             1 -> CounterComposeScreen()
             2 -> LoginScreen(viewModel = loginViewModel)
+            3 -> CartScreen(viewModel = cartViewModel)
         }
     }
 }
