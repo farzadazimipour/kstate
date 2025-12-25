@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.github.farzadazimipour.sample.app.ui.counter.mvi.CounterViewModel
 import com.github.farzadazimipour.sample.app.ui.counter.screens.CounterComposeScreen
 import com.github.farzadazimipour.sample.app.ui.counter.screens.CounterViewModelScreen
+import com.github.farzadazimipour.sample.app.ui.login.screens.LoginScreen
 import com.github.farzadazimipour.sample.app.ui.theme.KstateTheme
 
 class MainActivity : ComponentActivity() {
@@ -34,7 +35,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             KstateTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    CounterTabs(
+                    AppTabs(
                         counterViewModel = counterViewModel,
                         modifier = Modifier.padding(innerPadding)
                     )
@@ -45,12 +46,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun CounterTabs(
+fun AppTabs(
     counterViewModel: CounterViewModel,
     modifier: Modifier = Modifier,
 ) {
     var selectedTab by remember { mutableIntStateOf(0) }
-    val tabs = listOf("ViewModel", "Compose")
+    val tabs = listOf("Counter VM", "Counter Compose", "Login")
 
     Column(modifier = modifier) {
         SecondaryTabRow(
@@ -74,6 +75,7 @@ fun CounterTabs(
         when (selectedTab) {
             0 -> CounterViewModelScreen(viewModel = counterViewModel)
             1 -> CounterComposeScreen()
+            2 -> LoginScreen()
         }
     }
 }
