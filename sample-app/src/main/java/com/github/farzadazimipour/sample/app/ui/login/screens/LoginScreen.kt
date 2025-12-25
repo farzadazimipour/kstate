@@ -7,17 +7,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.github.farzadazimipour.kstate.compose.collectAsState
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.farzadazimipour.sample.app.ui.login.mvi.LoginEvent
 import com.github.farzadazimipour.sample.app.ui.login.mvi.LoginViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    viewModel: LoginViewModel = viewModel()
+    viewModel: LoginViewModel
 ) {
-    val state by viewModel.collectAsState()
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     Column(
         modifier = Modifier
@@ -41,7 +40,7 @@ fun LoginScreen(
 
             OutlinedTextField(
                 value = state.email,
-                onValueChange = { viewModel.sendEvent(LoginEvent.EmailChanged(it)) },
+                onValueChange = { viewModel.dispatch(LoginEvent.EmailChanged(it)) },
                 label = { Text("Email") },
                 isError = state.emailError != null,
                 supportingText = state.emailError?.let { { Text(it) } },
@@ -52,7 +51,7 @@ fun LoginScreen(
 
             OutlinedTextField(
                 value = state.password,
-                onValueChange = { viewModel.sendEvent(LoginEvent.PasswordChanged(it)) },
+                onValueChange = { viewModel.dispatch(LoginEvent.PasswordChanged(it)) },
                 label = { Text("Password") },
                 visualTransformation = PasswordVisualTransformation(),
                 isError = state.passwordError != null,
@@ -63,7 +62,7 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             Button(
-                onClick = { viewModel.sendEvent(LoginEvent.LoginClicked) },
+                onClick = { viewModel.dispatch(LoginEvent.LoginClicked) },
                 enabled = !state.isLoading,
                 modifier = Modifier.fillMaxWidth()
             ) {
