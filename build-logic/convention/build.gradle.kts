@@ -33,5 +33,10 @@ gradlePlugin {
             id = "kstate.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
+
+        register("jvmLibrary") {
+            id = "kstate.jvm.library"
+            implementationClass = "JvmLibraryConventionPlugin"
+        }
     }
 }

@@ -1,4 +1,5 @@
 import com.android.build.api.dsl.LibraryExtension
+import com.github.farzadazimipour.kstate.ProjectConfig
 import com.github.farzadazimipour.kstate.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -13,9 +14,9 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
-                testOptions.targetSdk = 36
-                lint.targetSdk = 36
-                defaultConfig.targetSdk = 36
+                testOptions.targetSdk = ProjectConfig.TARGET_SDK
+                lint.targetSdk = ProjectConfig.TARGET_SDK
+                defaultConfig.targetSdk = ProjectConfig.TARGET_SDK
                 defaultConfig.testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
                 testOptions.animationsDisabled = true
             }

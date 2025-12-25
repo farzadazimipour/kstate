@@ -29,3 +29,4 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 
 # Plugins defined by this project
 kstate-android-library = { id = "kstate.android.library" }
+kstate-jvm-library = { id = "kstate.jvm.library" }
