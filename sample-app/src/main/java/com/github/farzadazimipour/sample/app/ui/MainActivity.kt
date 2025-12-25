@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SecondaryTabRow
+import androidx.compose.material3.PrimaryScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -60,10 +60,10 @@ fun AppTabs(
     modifier: Modifier = Modifier,
 ) {
     var selectedTab by remember { mutableIntStateOf(0) }
-    val tabs = listOf("Counter VM", "Counter Compose", "Login", "Cart")
+    val tabs = listOf("Counter ViewModel", "Counter Only Compose", "Login", "Cart")
 
     Column(modifier = modifier) {
-        SecondaryTabRow(
+        PrimaryScrollableTabRow(
             selectedTabIndex = selectedTab,
             modifier = Modifier.padding(bottom = 16.dp)
         ) {
@@ -74,7 +74,7 @@ fun AppTabs(
                     text = {
                         Text(
                             text = title,
-                            style = MaterialTheme.typography.titleMedium
+                            style = MaterialTheme.typography.titleSmall
                         )
                     }
                 )
